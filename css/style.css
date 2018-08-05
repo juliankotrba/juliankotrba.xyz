@@ -118,6 +118,20 @@ footer {
     background-color: white;
 }
 
+.social_github:before {
+    font-family: "FontAwesome";
+    content: "\f09b";
+}
+
+.social_github {
+    background-color: #24292e;
+}
+
+.social_github:hover {
+    color:#24292e;
+    background-color: white;
+}
+
 .social_gitlab:before {
     font-family: "FontAwesome";
     content: "\f296";

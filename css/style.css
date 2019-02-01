@@ -86,6 +86,7 @@ footer {
 }
 
 .content_container {
+    position: relative;
     width: 100%;
     margin-left: 20px;
 }
@@ -170,6 +171,32 @@ footer {
     background-color: white;
 }
 
+.banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    border-color: transparent #ef5350 transparent transparent;
+    font-size: 22px;
+    color: white;
+}
+
+.fork-me:before {
+    font-family: "FontAwesome";
+    content: "\f09b";
+}
+
+.fork-me {
+    position: absolute;
+    top: 3px;
+    margin-left: 25px;
+    text-decoration: none;
+    color: inherit;
+}
+
 .unresolved {
     -webkit-text-decoration: #F44336 underline wavy;
     text-decoration: #F44336 underline wavy;
@@ -197,6 +224,10 @@ footer {
 
     .card {
         box-shadow: none;
+    }
+
+    .banner {
+        display: none;
     }
 }
 

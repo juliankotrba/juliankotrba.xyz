@@ -30,6 +30,7 @@
   var Pair = Kotlin.kotlin.Pair;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var numberToInt = Kotlin.numberToInt;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   Deg.prototype = Object.create(Enum.prototype);
@@ -105,7 +106,7 @@
     $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
     $receiver.codeSequence_m67nre$(' currLivingIn', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(': String = ', Styles_getInstance().DFLT_STYLES, 'breakable');
-    $receiver.codeSequence_m67nre$('"Vienna"', Styles_getInstance().STRING_STYLES, 'cssTab');
+    $receiver.codeSequence_m67nre$(livingInText(), Styles_getInstance().STRING_STYLES, 'cssTab');
     $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
@@ -205,11 +206,11 @@
   }
   function Person(name, ageInMilli, livingIn, degrees, currStudy, currWork) {
     if (name === void 0)
-      name = 'Julian Kotrba';
+      name = 'Julian Kotrba ' + daysUntilTokyo() + ' days until Tokyo';
     if (ageInMilli === void 0)
       ageInMilli = Person_init$lambda;
     if (livingIn === void 0)
-      livingIn = 'Vienna';
+      livingIn = 'Vienna, ' + daysUntilTokyo() + ' days until Tokyo';
     if (degrees === void 0)
       degrees = mutableMapOf([new Pair(Deg$BSc_getInstance(), 'Software & Information Engr.')]);
     if (currStudy === void 0)
@@ -268,6 +269,21 @@
   Person.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.ageInMilli, other.ageInMilli) && Kotlin.equals(this.livingIn, other.livingIn) && Kotlin.equals(this.degrees, other.degrees) && Kotlin.equals(this.currStudy, other.currStudy) && Kotlin.equals(this.currWork, other.currWork)))));
   };
+  function livingInText() {
+    var tmp$;
+    tmp$ = daysUntilTokyo();
+    if (tmp$ >= 2 && tmp$ <= 2147483647)
+      return '"' + 'Vienna, ' + daysUntilTokyo() + ' days until Tokyo' + '"';
+    else if (tmp$ === 1)
+      return '"' + 'Vienna, ' + daysUntilTokyo() + ' day until Tokyo' + '"';
+    else
+      return '"Tokyo"';
+  }
+  var Math_0 = Math;
+  function daysUntilTokyo() {
+    var x = (Date.UTC(2019, 2, 27) - Date.now()) / 86400000;
+    return numberToInt(Math_0.ceil(x));
+  }
   function Deg(name, ordinal) {
     Enum.call(this);
     this.name$ = name;
@@ -303,6 +319,8 @@
   _.main_kand9s$ = main;
   _.dslCode = dslCode;
   _.Person = Person;
+  _.livingInText = livingInText;
+  _.daysUntilTokyo = daysUntilTokyo;
   Object.defineProperty(Deg, 'BSc', {
     get: Deg$BSc_getInstance
   });

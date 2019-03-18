@@ -27,7 +27,7 @@
   var WeightValue = $module$code_writer_library.model.WeightValue;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var L718326000000 = new Kotlin.Long(1066461568, 167);
-  var Pair = Kotlin.kotlin.Pair;
+  var to = Kotlin.kotlin.to_ujzrz7$;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var numberToInt = Kotlin.numberToInt;
@@ -104,7 +104,7 @@
   }
   function dslCode$lambda$lambda_5($receiver) {
     $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
-    $receiver.codeSequence_m67nre$(' currLivingIn', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(' livingIn', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(': String = ', Styles_getInstance().DFLT_STYLES, 'breakable');
     $receiver.codeSequence_m67nre$(livingInText(), Styles_getInstance().STRING_STYLES, 'cssTab');
     $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
@@ -119,13 +119,12 @@
     return Unit;
   }
   function dslCode$lambda$lambda_7($receiver) {
-    $receiver.codeSequenceWithTabs_2qhsao$(2, 'Pair(', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequenceWithTabs_2qhsao$(2, '', Styles_getInstance().DFLT_STYLES);
     $receiver.codeSequence_m67nre$('Deg', Styles_getInstance().DFLT_STYLES, 'unresolved');
     $receiver.codeSequence_m67nre$('.', Styles_getInstance().DFLT_STYLES);
     $receiver.codeSequence_m67nre$('BSc', Styles_getInstance().VAR_STYLES);
-    $receiver.codeSequence_m67nre$(', ', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequence_m67nre$(' to ', Styles_getInstance().DFLT_STYLES);
     $receiver.codeSequence_m67nre$('"Software & Information Engr."', Styles_getInstance().STRING_STYLES);
-    $receiver.codeSequence_m67nre$(')', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
   function dslCode$lambda$lambda_8($receiver) {
@@ -134,7 +133,7 @@
   }
   function dslCode$lambda$lambda_9($receiver) {
     $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
-    $receiver.codeSequence_m67nre$(' currStudy', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(' study', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(': String? = ', Styles_getInstance().DFLT_STYLES, 'breakable');
     $receiver.codeSequence_m67nre$('"SE & Inet Comp. @ TU-Vienna"', Styles_getInstance().STRING_STYLES, 'cssTab');
     $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
@@ -142,7 +141,7 @@
   }
   function dslCode$lambda$lambda_10($receiver) {
     $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
-    $receiver.codeSequence_m67nre$(' currWork', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(' work', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(': String? = ', Styles_getInstance().DFLT_STYLES, 'breakable');
     $receiver.codeSequence_m67nre$('"Part-time SE @ APA-IT"', Styles_getInstance().STRING_STYLES, 'cssTab');
     return Unit;
@@ -212,7 +211,7 @@
     if (livingIn === void 0)
       livingIn = 'Vienna, ' + daysUntilTokyo() + ' days until Tokyo';
     if (degrees === void 0)
-      degrees = mutableMapOf([new Pair(Deg$BSc_getInstance(), 'Software & Information Engr.')]);
+      degrees = mutableMapOf([to(Deg$BSc_getInstance(), 'Software & Information Engr.')]);
     if (currStudy === void 0)
       currStudy = 'SE & Internet Comp., MA';
     if (currWork === void 0)

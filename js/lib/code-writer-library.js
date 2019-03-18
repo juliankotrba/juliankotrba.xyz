@@ -1,10 +1,10 @@
 if (typeof kotlin === 'undefined') {
   throw new Error("Error loading module 'code-writer-library'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'code-writer-library'.");
 }
-if (typeof this['kotlinx-coroutines-core-js'] === 'undefined') {
-  throw new Error("Error loading module 'code-writer-library'. Its dependency 'kotlinx-coroutines-core-js' was not found. Please, check whether 'kotlinx-coroutines-core-js' is loaded prior to 'code-writer-library'.");
+if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
+  throw new Error("Error loading module 'code-writer-library'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'code-writer-library'.");
 }
-this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_core_js) {
+this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
   'use strict';
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
@@ -15,11 +15,12 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var repeat = Kotlin.kotlin.text.repeat_94bcnn$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
-  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var throwCCE = Kotlin.throwCCE;
-  var delay = $module$kotlinx_coroutines_core_js.kotlinx.coroutines.experimental.delay_za3lpa$;
-  var launch = $module$kotlinx_coroutines_core_js.kotlinx.coroutines.experimental.launch_ej4974$;
+  var delay = $module$kotlinx_coroutines_core.kotlinx.coroutines.delay_s8cxhz$;
+  var coroutines = $module$kotlinx_coroutines_core.kotlinx.coroutines;
+  var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.launch_s496o7$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   WeightValue.prototype = Object.create(Enum.prototype);
@@ -243,13 +244,6 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
     this.codeContainer_0 = codeContainer;
     this.writeDelayInMillisGenerator_0 = writeDelayInMillisGenerator;
   }
-  DivContainerManager.prototype.appendLineOfCode_ar2ddm$ = function (codeLine_0, continuation_0, suspended) {
-    var instance = new Coroutine$appendLineOfCode_ar2ddm$(this, codeLine_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  };
   function Coroutine$appendLineOfCode_ar2ddm$($this, codeLine_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -295,6 +289,8 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
             continue;
           case 4:
             return;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -309,16 +305,16 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
       }
      while (true);
   };
-  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
-  var toBoxedChar = Kotlin.toBoxedChar;
-  var unboxChar = Kotlin.unboxChar;
-  DivContainerManager.prototype.handleText_0 = function (codeSequence_0, codeLineContainer_0, continuation_0, suspended) {
-    var instance = new Coroutine$handleText_0(this, codeSequence_0, codeLineContainer_0, continuation_0);
+  DivContainerManager.prototype.appendLineOfCode_ar2ddm$ = function (codeLine_0, continuation_0, suspended) {
+    var instance = new Coroutine$appendLineOfCode_ar2ddm$(this, codeLine_0, continuation_0);
     if (suspended)
       return instance;
     else
       return instance.doResume(null);
   };
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var toBoxedChar = Kotlin.toBoxedChar;
+  var unboxChar = Kotlin.unboxChar;
   function Coroutine$handleText_0($this, codeSequence_0, codeLineContainer_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -357,7 +353,7 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
             var char = toBoxedChar(element);
             this.local$span.innerText = this.local$span.innerText + String.fromCharCode(char);
             this.state_0 = 3;
-            this.result_0 = delay(this.$this.writeDelayInMillisGenerator_0(), this);
+            this.result_0 = delay(Kotlin.Long.fromInt(this.$this.writeDelayInMillisGenerator_0()), this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -368,6 +364,8 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
             var textStyleAfter = this.local$codeSequence.styleSet.textStyleAfter;
             this.local$span.setAttribute('style', this.$this.toCssString_0(textStyleAfter) + 'white-space: pre');
             return;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -381,6 +379,13 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
         }
       }
      while (true);
+  };
+  DivContainerManager.prototype.handleText_0 = function (codeSequence_0, codeLineContainer_0, continuation_0, suspended) {
+    var instance = new Coroutine$handleText_0(this, codeSequence_0, codeLineContainer_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
   };
   DivContainerManager.prototype.toSpanElement_0 = function ($receiver) {
     var tmp$;
@@ -405,16 +410,7 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   function JsCodeWriter(containerManager) {
     this.containerManager_0 = containerManager;
   }
-  function JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0) {
-    return function ($receiver, continuation_0, suspended) {
-      var instance = new Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver, controller, continuation_0) {
+  function Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
@@ -456,6 +452,8 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
             continue;
           case 4:
             return Unit;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -470,8 +468,17 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
       }
      while (true);
   };
+  function JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0) {
+    return function ($receiver_0, continuation_0, suspended) {
+      var instance = new Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver_0, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
   JsCodeWriter.prototype.write_lp2qyj$ = function (code) {
-    launch(void 0, void 0, void 0, JsCodeWriter$write$lambda(code, this));
+    launch(coroutines.GlobalScope, void 0, void 0, JsCodeWriter$write$lambda(code, this));
   };
   JsCodeWriter.$metadata$ = {
     kind: Kind_CLASS,
@@ -698,4 +705,4 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   package$model.WeightValue = WeightValue;
   Kotlin.defineModule('code-writer-library', _);
   return _;
-}(typeof this['code-writer-library'] === 'undefined' ? {} : this['code-writer-library'], kotlin, this['kotlinx-coroutines-core-js']);
+}(typeof this['code-writer-library'] === 'undefined' ? {} : this['code-writer-library'], kotlin, this['kotlinx-coroutines-core']);

@@ -14,15 +14,13 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var repeat = Kotlin.kotlin.text.repeat_94bcnn$;
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
-  var throwCCE = Kotlin.throwCCE;
-  var delay = $module$kotlinx_coroutines_core.kotlinx.coroutines.delay_s8cxhz$;
-  var coroutines = $module$kotlinx_coroutines_core.kotlinx.coroutines;
   var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.launch_s496o7$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
+  var throwCCE = Kotlin.throwCCE;
+  var delay = $module$kotlinx_coroutines_core.kotlinx.coroutines.delay_s8cxhz$;
   WeightValue.prototype = Object.create(Enum.prototype);
   WeightValue.prototype.constructor = WeightValue;
   function CodeSequenceBuilder(text, styleSet, elementClass) {
@@ -224,208 +222,26 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   function addPrefixTabs($receiver, tabCount) {
     return repeat('    ', tabCount) + $receiver;
   }
-  function CodeWriter() {
-  }
-  CodeWriter.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'CodeWriter',
-    interfaces: []
-  };
-  function ContainerManager() {
-  }
-  ContainerManager.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'ContainerManager',
-    interfaces: []
-  };
-  function DivContainerManager(codeContainer, writeDelayInMillisGenerator) {
-    if (writeDelayInMillisGenerator === void 0)
-      writeDelayInMillisGenerator = DivContainerManager_init$lambda;
-    this.codeContainer_0 = codeContainer;
-    this.writeDelayInMillisGenerator_0 = writeDelayInMillisGenerator;
-  }
-  function Coroutine$appendLineOfCode_ar2ddm$($this, codeLine_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.$this = $this;
-    this.local$lineContainer = void 0;
-    this.local$tmp$ = void 0;
-    this.local$codeLine = codeLine_0;
-  }
-  Coroutine$appendLineOfCode_ar2ddm$.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$appendLineOfCode_ar2ddm$.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$appendLineOfCode_ar2ddm$.prototype.constructor = Coroutine$appendLineOfCode_ar2ddm$;
-  Coroutine$appendLineOfCode_ar2ddm$.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            var tmp$;
-            this.local$lineContainer = Kotlin.isType(tmp$ = document.createElement('div'), HTMLDivElement) ? tmp$ : throwCCE();
-            this.$this.codeContainer_0.appendChild(this.local$lineContainer);
-            this.local$tmp$ = this.local$codeLine.line.iterator();
-            this.state_0 = 2;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            if (!this.local$tmp$.hasNext()) {
-              this.state_0 = 4;
-              continue;
-            }
-
-            var element = this.local$tmp$.next();
-            this.state_0 = 3;
-            this.result_0 = this.$this.handleText_0(element, this.local$lineContainer, this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 3:
-            this.state_0 = 2;
-            continue;
-          case 4:
-            return;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  DivContainerManager.prototype.appendLineOfCode_ar2ddm$ = function (codeLine_0, continuation_0, suspended) {
-    var instance = new Coroutine$appendLineOfCode_ar2ddm$(this, codeLine_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  };
-  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
-  var toBoxedChar = Kotlin.toBoxedChar;
-  var unboxChar = Kotlin.unboxChar;
-  function Coroutine$handleText_0($this, codeSequence_0, codeLineContainer_0, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.$this = $this;
-    this.local$span = void 0;
-    this.local$tmp$ = void 0;
-    this.local$codeSequence = codeSequence_0;
-    this.local$codeLineContainer = codeLineContainer_0;
-  }
-  Coroutine$handleText_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$handleText_0.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$handleText_0.prototype.constructor = Coroutine$handleText_0;
-  Coroutine$handleText_0.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.local$span = this.$this.toSpanElement_0(this.local$codeSequence);
-            this.local$codeLineContainer.appendChild(this.local$span);
-            this.local$tmp$ = iterator(this.local$codeSequence.text);
-            this.state_0 = 2;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            if (!this.local$tmp$.hasNext()) {
-              this.state_0 = 4;
-              continue;
-            }
-
-            var element = unboxChar(this.local$tmp$.next());
-            var char = toBoxedChar(element);
-            this.local$span.innerText = this.local$span.innerText + String.fromCharCode(char);
-            this.state_0 = 3;
-            this.result_0 = delay(Kotlin.Long.fromInt(this.$this.writeDelayInMillisGenerator_0()), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 3:
-            this.state_0 = 2;
-            continue;
-          case 4:
-            var textStyleAfter = this.local$codeSequence.styleSet.textStyleAfter;
-            this.local$span.setAttribute('style', this.$this.toCssString_0(textStyleAfter) + 'white-space: pre');
-            return;
-          default:this.state_0 = 1;
-            throw new Error('State Machine Unreachable execution');
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  DivContainerManager.prototype.handleText_0 = function (codeSequence_0, codeLineContainer_0, continuation_0, suspended) {
-    var instance = new Coroutine$handleText_0(this, codeSequence_0, codeLineContainer_0, continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  };
-  DivContainerManager.prototype.toSpanElement_0 = function ($receiver) {
-    var tmp$;
-    var textStyleBefore = $receiver.styleSet.textStyleBefore;
-    var $receiver_0 = Kotlin.isType(tmp$ = document.createElement('span'), HTMLSpanElement) ? tmp$ : throwCCE();
-    $receiver_0.textContent = '';
-    $receiver_0.setAttribute('style', this.toCssString_0(textStyleBefore) + 'white-space: pre');
-    $receiver_0.setAttribute('class', $receiver.additionalElementClass);
-    return $receiver_0;
-  };
-  DivContainerManager.prototype.toCssString_0 = function ($receiver) {
-    return 'color: ' + $receiver.colorInHex + ';' + ('font-weight: ' + $receiver.fontWeight + ';');
-  };
-  function DivContainerManager_init$lambda() {
-    return 0;
-  }
-  DivContainerManager.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'DivContainerManager',
-    interfaces: [ContainerManager]
-  };
-  function JsCodeWriter(containerManager) {
+  function CodeWriter(coroutineScope, containerManager) {
+    this.coroutineScope_0 = coroutineScope;
     this.containerManager_0 = containerManager;
   }
-  function Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver_0, controller, continuation_0) {
+  function Coroutine$CodeWriter$write$lambda(closure$code_0, this$CodeWriter_0, $receiver_0, controller, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.$controller = controller;
     this.exceptionState_0 = 1;
     this.local$closure$code = closure$code_0;
-    this.local$this$JsCodeWriter = this$JsCodeWriter_0;
+    this.local$this$CodeWriter = this$CodeWriter_0;
     this.local$tmp$ = void 0;
   }
-  Coroutine$JsCodeWriter$write$lambda.$metadata$ = {
+  Coroutine$CodeWriter$write$lambda.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: null,
     interfaces: [CoroutineImpl]
   };
-  Coroutine$JsCodeWriter$write$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$JsCodeWriter$write$lambda.prototype.constructor = Coroutine$JsCodeWriter$write$lambda;
-  Coroutine$JsCodeWriter$write$lambda.prototype.doResume = function () {
+  Coroutine$CodeWriter$write$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$CodeWriter$write$lambda.prototype.constructor = Coroutine$CodeWriter$write$lambda;
+  Coroutine$CodeWriter$write$lambda.prototype.doResume = function () {
     do
       try {
         switch (this.state_0) {
@@ -443,7 +259,7 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
 
             var element = this.local$tmp$.next();
             this.state_0 = 3;
-            this.result_0 = this.local$this$JsCodeWriter.containerManager_0.appendLineOfCode_ar2ddm$(element, this);
+            this.result_0 = this.local$this$CodeWriter.containerManager_0.appendLineOfCode_ar2ddm$(element, this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -468,22 +284,22 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
       }
      while (true);
   };
-  function JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0) {
+  function CodeWriter$write$lambda(closure$code_0, this$CodeWriter_0) {
     return function ($receiver_0, continuation_0, suspended) {
-      var instance = new Coroutine$JsCodeWriter$write$lambda(closure$code_0, this$JsCodeWriter_0, $receiver_0, this, continuation_0);
+      var instance = new Coroutine$CodeWriter$write$lambda(closure$code_0, this$CodeWriter_0, $receiver_0, this, continuation_0);
       if (suspended)
         return instance;
       else
         return instance.doResume(null);
     };
   }
-  JsCodeWriter.prototype.write_lp2qyj$ = function (code) {
-    launch(coroutines.GlobalScope, void 0, void 0, JsCodeWriter$write$lambda(code, this));
+  CodeWriter.prototype.write_lp2qyj$ = function (code) {
+    launch(this.coroutineScope_0, void 0, void 0, CodeWriter$write$lambda(code, this));
   };
-  JsCodeWriter.$metadata$ = {
+  CodeWriter.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'JsCodeWriter',
-    interfaces: [CodeWriter]
+    simpleName: 'CodeWriter',
+    interfaces: []
   };
   function CodeBlock(codeLines) {
     this.codeLines = codeLines;
@@ -674,6 +490,175 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
     }
   }
   WeightValue.valueOf_61zpoe$ = WeightValue$valueOf;
+  function ContainerManager(codeContainer, writeDelayInMillisGenerator) {
+    if (writeDelayInMillisGenerator === void 0)
+      writeDelayInMillisGenerator = ContainerManager_init$lambda;
+    this.codeContainer_0 = codeContainer;
+    this.writeDelayInMillisGenerator_0 = writeDelayInMillisGenerator;
+  }
+  function Coroutine$appendLineOfCode_ar2ddm$($this, codeLine_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.$this = $this;
+    this.local$lineContainer = void 0;
+    this.local$tmp$ = void 0;
+    this.local$codeLine = codeLine_0;
+  }
+  Coroutine$appendLineOfCode_ar2ddm$.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$appendLineOfCode_ar2ddm$.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$appendLineOfCode_ar2ddm$.prototype.constructor = Coroutine$appendLineOfCode_ar2ddm$;
+  Coroutine$appendLineOfCode_ar2ddm$.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            this.local$lineContainer = Kotlin.isType(tmp$ = document.createElement('div'), HTMLDivElement) ? tmp$ : throwCCE();
+            this.$this.codeContainer_0.appendChild(this.local$lineContainer);
+            this.local$tmp$ = this.local$codeLine.line.iterator();
+            this.state_0 = 2;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            if (!this.local$tmp$.hasNext()) {
+              this.state_0 = 4;
+              continue;
+            }
+
+            var element = this.local$tmp$.next();
+            this.state_0 = 3;
+            this.result_0 = this.$this.handleText_0(element, this.local$lineContainer, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            this.state_0 = 2;
+            continue;
+          case 4:
+            return;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  ContainerManager.prototype.appendLineOfCode_ar2ddm$ = function (codeLine_0, continuation_0, suspended) {
+    var instance = new Coroutine$appendLineOfCode_ar2ddm$(this, codeLine_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  };
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var toBoxedChar = Kotlin.toBoxedChar;
+  var unboxChar = Kotlin.unboxChar;
+  function Coroutine$handleText_0($this, codeSequence_0, codeLineContainer_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.$this = $this;
+    this.local$span = void 0;
+    this.local$tmp$ = void 0;
+    this.local$codeSequence = codeSequence_0;
+    this.local$codeLineContainer = codeLineContainer_0;
+  }
+  Coroutine$handleText_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$handleText_0.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$handleText_0.prototype.constructor = Coroutine$handleText_0;
+  Coroutine$handleText_0.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$span = this.$this.toSpanElement_0(this.local$codeSequence);
+            this.local$codeLineContainer.appendChild(this.local$span);
+            this.local$tmp$ = iterator(this.local$codeSequence.text);
+            this.state_0 = 2;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            if (!this.local$tmp$.hasNext()) {
+              this.state_0 = 4;
+              continue;
+            }
+
+            var element = unboxChar(this.local$tmp$.next());
+            var char = toBoxedChar(element);
+            this.local$span.innerText = this.local$span.innerText + String.fromCharCode(char);
+            this.state_0 = 3;
+            this.result_0 = delay(Kotlin.Long.fromInt(this.$this.writeDelayInMillisGenerator_0()), this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            this.state_0 = 2;
+            continue;
+          case 4:
+            var textStyleAfter = this.local$codeSequence.styleSet.textStyleAfter;
+            this.local$span.setAttribute('style', this.$this.toCssString_0(textStyleAfter) + 'white-space: pre');
+            return;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  ContainerManager.prototype.handleText_0 = function (codeSequence_0, codeLineContainer_0, continuation_0, suspended) {
+    var instance = new Coroutine$handleText_0(this, codeSequence_0, codeLineContainer_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  };
+  ContainerManager.prototype.toSpanElement_0 = function ($receiver) {
+    var tmp$;
+    var textStyleBefore = $receiver.styleSet.textStyleBefore;
+    var $receiver_0 = Kotlin.isType(tmp$ = document.createElement('span'), HTMLSpanElement) ? tmp$ : throwCCE();
+    $receiver_0.textContent = '';
+    $receiver_0.setAttribute('style', this.toCssString_0(textStyleBefore) + 'white-space: pre');
+    $receiver_0.setAttribute('class', $receiver.additionalElementClass);
+    return $receiver_0;
+  };
+  ContainerManager.prototype.toCssString_0 = function ($receiver) {
+    return 'color: ' + $receiver.colorInHex + ';' + ('font-weight: ' + $receiver.fontWeight + ';');
+  };
+  function ContainerManager_init$lambda() {
+    return 0;
+  }
+  ContainerManager.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ContainerManager',
+    interfaces: []
+  };
   var package$builder = _.builder || (_.builder = {});
   package$builder.CodeSequenceBuilder = CodeSequenceBuilder;
   package$builder.MultipleCodeSequencesBuilder = MultipleCodeSequencesBuilder;
@@ -686,10 +671,6 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
   package$builder.addPrefixTabs_6ic1pp$ = addPrefixTabs;
   var package$codewriter = _.codewriter || (_.codewriter = {});
   package$codewriter.CodeWriter = CodeWriter;
-  package$codewriter.ContainerManager = ContainerManager;
-  var package$impl = package$codewriter.impl || (package$codewriter.impl = {});
-  package$impl.DivContainerManager = DivContainerManager;
-  package$impl.JsCodeWriter = JsCodeWriter;
   var package$model = _.model || (_.model = {});
   package$model.CodeBlock = CodeBlock;
   package$model.CodeLine = CodeLine;
@@ -703,6 +684,7 @@ this['code-writer-library'] = function (_, Kotlin, $module$kotlinx_coroutines_co
     get: WeightValue$BOLD_getInstance
   });
   package$model.WeightValue = WeightValue;
+  package$codewriter.ContainerManager = ContainerManager;
   Kotlin.defineModule('code-writer-library', _);
   return _;
 }(typeof this['code-writer-library'] === 'undefined' ? {} : this['code-writer-library'], kotlin, this['kotlinx-coroutines-core']);

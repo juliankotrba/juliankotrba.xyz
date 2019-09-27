@@ -1,8 +1,8 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
-    define(['exports', 'kotlin', 'code-writer-library'], factory);
+    define(['exports', 'kotlin', 'code-writer-library', 'kotlinx-coroutines-core'], factory);
   else if (typeof exports === 'object')
-    factory(module.exports, require('kotlin'), require('code-writer-library'));
+    factory(module.exports, require('kotlin'), require('code-writer-library'), require('kotlinx-coroutines-core'));
   else {
     if (typeof kotlin === 'undefined') {
       throw new Error("Error loading module 'code-writer'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'code-writer'.");
@@ -10,9 +10,12 @@
     if (typeof this['code-writer-library'] === 'undefined') {
       throw new Error("Error loading module 'code-writer'. Its dependency 'code-writer-library' was not found. Please, check whether 'code-writer-library' is loaded prior to 'code-writer'.");
     }
-    root['code-writer'] = factory(typeof this['code-writer'] === 'undefined' ? {} : this['code-writer'], kotlin, this['code-writer-library']);
+    if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
+      throw new Error("Error loading module 'code-writer'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'code-writer'.");
+    }
+    root['code-writer'] = factory(typeof this['code-writer'] === 'undefined' ? {} : this['code-writer'], kotlin, this['code-writer-library'], this['kotlinx-coroutines-core']);
   }
-}(this, function (_, Kotlin, $module$code_writer_library) {
+}(this, function (_, Kotlin, $module$code_writer_library, $module$kotlinx_coroutines_core) {
   'use strict';
   var Unit = Kotlin.kotlin.Unit;
   var codeBlock = $module$code_writer_library.builder.codeBlock_conr1y$;
@@ -20,8 +23,9 @@
   var shuffled = Kotlin.kotlin.collections.shuffled_7wnvza$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var throwCCE = Kotlin.throwCCE;
-  var DivContainerManager = $module$code_writer_library.codewriter.impl.DivContainerManager;
-  var JsCodeWriter = $module$code_writer_library.codewriter.impl.JsCodeWriter;
+  var coroutines = $module$kotlinx_coroutines_core.kotlinx.coroutines;
+  var ContainerManager = $module$code_writer_library.codewriter.ContainerManager;
+  var CodeWriter = $module$code_writer_library.codewriter.CodeWriter;
   var CodeSequenceStyle = $module$code_writer_library.model.CodeSequenceStyle;
   var StyleSet = $module$code_writer_library.model.StyleSet;
   var WeightValue = $module$code_writer_library.model.WeightValue;
@@ -30,7 +34,6 @@
   var to = Kotlin.kotlin.to_ujzrz7$;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var numberToInt = Kotlin.numberToInt;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   Deg.prototype = Object.create(Enum.prototype);
@@ -174,7 +177,7 @@
     var c = codeBlock(dslCode$lambda);
     var delayGenFunc = dslCode$lambda_0;
     var divContainer = Kotlin.isType(tmp$ = document.getElementById('code_container'), HTMLDivElement) ? tmp$ : throwCCE();
-    var cw = new JsCodeWriter(new DivContainerManager(divContainer, delayGenFunc));
+    var cw = new CodeWriter(coroutines.GlobalScope, new ContainerManager(divContainer, delayGenFunc));
     cw.write_lp2qyj$(c);
   }
   function Styles() {
@@ -205,11 +208,11 @@
   }
   function Person(name, ageInMilli, livingIn, degrees, currStudy, currWork) {
     if (name === void 0)
-      name = 'Julian Kotrba ' + daysUntilTokyo() + ' days until Tokyo';
+      name = 'Julian Kotrba';
     if (ageInMilli === void 0)
       ageInMilli = Person_init$lambda;
     if (livingIn === void 0)
-      livingIn = 'Vienna, ' + daysUntilTokyo() + ' days until Tokyo';
+      livingIn = 'Vienna';
     if (degrees === void 0)
       degrees = mutableMapOf([to(Deg$BSc_getInstance(), 'Software & Information Engr.')]);
     if (currStudy === void 0)
@@ -269,19 +272,7 @@
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.ageInMilli, other.ageInMilli) && Kotlin.equals(this.livingIn, other.livingIn) && Kotlin.equals(this.degrees, other.degrees) && Kotlin.equals(this.currStudy, other.currStudy) && Kotlin.equals(this.currWork, other.currWork)))));
   };
   function livingInText() {
-    var tmp$;
-    tmp$ = daysUntilTokyo();
-    if (tmp$ >= 2 && tmp$ <= 2147483647)
-      return '"' + 'Vienna, ' + daysUntilTokyo() + ' days until Tokyo' + '"';
-    else if (tmp$ === 1)
-      return '"' + 'Vienna, ' + daysUntilTokyo() + ' day until Tokyo' + '"';
-    else
-      return '"Tokyo"';
-  }
-  var Math_0 = Math;
-  function daysUntilTokyo() {
-    var x = (Date.UTC(2019, 2, 27) - Date.now()) / 86400000;
-    return numberToInt(Math_0.ceil(x));
+    return '"Vienna"';
   }
   function Deg(name, ordinal) {
     Enum.call(this);
@@ -319,7 +310,6 @@
   _.dslCode = dslCode;
   _.Person = Person;
   _.livingInText = livingInText;
-  _.daysUntilTokyo = daysUntilTokyo;
   Object.defineProperty(Deg, 'BSc', {
     get: Deg$BSc_getInstance
   });

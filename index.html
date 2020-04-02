@@ -30,8 +30,14 @@
                     <a class="social_button social_github"
                        href="https://github.com/juliankotrba"></a>
                     <a class="social_button social_instagram" href="https://instagram.com/juliankotrba"></a>
-                    <a class="social_button social_mail" href="mailto:hello@juliankotrba.xyz"></a>
+                    <!-- https://www.smartlabsoftware.com/howto/hide-email-spambots.htm-->
+                    <script type="text/javascript">
+                        u = "hello";
+                        d = "juliankotrba.xyz";
+                        document.write('<a class="social_button social_mail" href=\"mailto:' + u + '@' + d + '\">' + '</a>');
+                    </script>
                     <a class="social_button social_pubkey" href="files/pubkey.asc" download="pubkey.asc"></a>
+
                 </div>
             </div>
 

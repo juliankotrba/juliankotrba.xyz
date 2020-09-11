@@ -128,28 +128,38 @@
     $receiver.codeSequence_m67nre$('BSc', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(' to ', Styles_getInstance().DFLT_STYLES);
     $receiver.codeSequence_m67nre$('"Software & Information Engr."', Styles_getInstance().STRING_STYLES);
+    $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
   function dslCode$lambda$lambda_8($receiver) {
-    $receiver.codeSequenceWithTabs_2qhsao$(1, '),', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequenceWithTabs_2qhsao$(2, '', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequence_m67nre$('Deg', Styles_getInstance().DFLT_STYLES, 'unresolved');
+    $receiver.codeSequence_m67nre$('.', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequence_m67nre$('Dipl_Ing', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(' to ', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequence_m67nre$('"Software Engr. & Internet Comp."', Styles_getInstance().STRING_STYLES);
     return Unit;
   }
   function dslCode$lambda$lambda_9($receiver) {
-    $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
-    $receiver.codeSequence_m67nre$(' study', Styles_getInstance().VAR_STYLES);
-    $receiver.codeSequence_m67nre$(': String? = ', Styles_getInstance().DFLT_STYLES, 'breakable');
-    $receiver.codeSequence_m67nre$('"SE & Inet Comp. @ TU-Vienna"', Styles_getInstance().STRING_STYLES, 'cssTab');
-    $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
+    $receiver.codeSequenceWithTabs_2qhsao$(1, '),', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
   function dslCode$lambda$lambda_10($receiver) {
     $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
-    $receiver.codeSequence_m67nre$(' work', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(' study', Styles_getInstance().VAR_STYLES);
     $receiver.codeSequence_m67nre$(': String? = ', Styles_getInstance().DFLT_STYLES, 'breakable');
-    $receiver.codeSequence_m67nre$('"Part-time SE @ APA-IT"', Styles_getInstance().STRING_STYLES, 'cssTab');
+    $receiver.codeSequence_m67nre$('null', Styles_getInstance().DFLT_STYLES, 'cssTab');
+    $receiver.codeSequence_m67nre$(',', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
   function dslCode$lambda$lambda_11($receiver) {
+    $receiver.codeSequenceWithTabs_2qhsao$(1, 'val', Styles_getInstance().KW_STYLES);
+    $receiver.codeSequence_m67nre$(' work', Styles_getInstance().VAR_STYLES);
+    $receiver.codeSequence_m67nre$(': String? = ', Styles_getInstance().DFLT_STYLES, 'breakable');
+    $receiver.codeSequence_m67nre$('"Android Developer @ APA-IT"', Styles_getInstance().STRING_STYLES, 'cssTab');
+    return Unit;
+  }
+  function dslCode$lambda$lambda_12($receiver) {
     $receiver.codeSequence_m67nre$(')', Styles_getInstance().DFLT_STYLES);
     return Unit;
   }
@@ -167,6 +177,7 @@
     $receiver.codeLine_tz2qiy$(dslCode$lambda$lambda_9);
     $receiver.codeLine_tz2qiy$(dslCode$lambda$lambda_10);
     $receiver.codeLine_tz2qiy$(dslCode$lambda$lambda_11);
+    $receiver.codeLine_tz2qiy$(dslCode$lambda$lambda_12);
     return Unit;
   }
   function dslCode$lambda_0() {
@@ -214,11 +225,11 @@
     if (livingIn === void 0)
       livingIn = 'Vienna';
     if (degrees === void 0)
-      degrees = mutableMapOf([to(Deg$BSc_getInstance(), 'Software & Information Engr.')]);
+      degrees = mutableMapOf([to(Deg$BSc_getInstance(), 'Software & Information Engr.'), to(Deg$Dipl_Ing_getInstance(), 'Software Engr. & Internet Comp.')]);
     if (currStudy === void 0)
-      currStudy = 'SE & Internet Comp., MA';
+      currStudy = null;
     if (currWork === void 0)
-      currWork = 'Part time SE @ APA-IT';
+      currWork = 'Android Developer @ APA-IT';
     this.name = name;
     this.ageInMilli = ageInMilli;
     this.livingIn = livingIn;
@@ -283,11 +294,17 @@
     Deg_initFields = function () {
     };
     Deg$BSc_instance = new Deg('BSc', 0);
+    Deg$Dipl_Ing_instance = new Deg('Dipl_Ing', 1);
   }
   var Deg$BSc_instance;
   function Deg$BSc_getInstance() {
     Deg_initFields();
     return Deg$BSc_instance;
+  }
+  var Deg$Dipl_Ing_instance;
+  function Deg$Dipl_Ing_getInstance() {
+    Deg_initFields();
+    return Deg$Dipl_Ing_instance;
   }
   Deg.$metadata$ = {
     kind: Kind_CLASS,
@@ -295,13 +312,15 @@
     interfaces: [Enum]
   };
   function Deg$values() {
-    return [Deg$BSc_getInstance()];
+    return [Deg$BSc_getInstance(), Deg$Dipl_Ing_getInstance()];
   }
   Deg.values = Deg$values;
   function Deg$valueOf(name) {
     switch (name) {
       case 'BSc':
         return Deg$BSc_getInstance();
+      case 'Dipl_Ing':
+        return Deg$Dipl_Ing_getInstance();
       default:throwISE('No enum constant Deg.' + name);
     }
   }
@@ -312,6 +331,9 @@
   _.livingInText = livingInText;
   Object.defineProperty(Deg, 'BSc', {
     get: Deg$BSc_getInstance
+  });
+  Object.defineProperty(Deg, 'Dipl_Ing', {
+    get: Deg$Dipl_Ing_getInstance
   });
   _.Deg = Deg;
   main([]);
